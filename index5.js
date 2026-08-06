@@ -226,5 +226,215 @@
 //-------------------------------------------------------------------------------------------------
 //=================================================================================================
 
+//___part 2
+
+//____1
+
+// import fs from "fs";
+// import http from "http";
+
+// http.createServer((req ,res) => {
+//     const url = req.url;
+//     const method = req.method;
+//     if (url == "/user" && method == "POST") {
+//         let data = ""
+//         req.on("data",(chunks) => {
+//             data += chunks;
+//         })
+//         req.on("end",() => {
+//             data = JSON.parse(data)
+//             fs.readFile("./users.json","utf-8",(err ,users) => {
+//                 if(err){
+//                     res.write(err.message)
+//                     res.end()
+//                     return
+//                 }
+//                 users = JSON.parse(users);
+//                 const isExist = users.find(user => user.email === data.email)
+//                 if (isExist) {
+//                     res.write("Email already exists")
+//                     res.end()
+//                     return
+//                 }else {
+//                     users.push(data)
+//                     fs.writeFile("./users.json",JSON.stringify(users,null,2) ,(err) => {
+//                         if (err) {
+//                             res.write(err.message)
+//                             res.end()
+//                             return
+//                         }
+//                         res.write("user add successfully")
+//                         res.end()
+//                     })
+//                 }
+//             })
+//         })
+//     }else{
+//         res.writeHead(404);
+//         res.write("not found")
+//     }
+// }).listen(3000,()=>{
+//     console.log("running on port 3000");  
+// })
+
+//___________2
 
 
+
+// import fs from "fs";
+// import http from "http";
+
+// http.createServer((req ,res) => {
+//     const url = req.url;
+//     const method = req.method;
+//     if (url.startsWith("/user/") && method == "PATCH") {
+//         let data = ""
+//         req.on("data",(chunks) => {
+//             data += chunks;
+//         })
+//         req.on("end",() => {
+//             data = JSON.parse(data)
+//             fs.readFile("./users.json","utf-8",(err ,users) => {
+//                 if(err){
+//                     res.write(err.message)
+//                     res.end()
+//                     return
+//                 }
+//                 users = JSON.parse(users);
+//                 const id = Number(url.split("/")[2])
+//                 const isExist = users.find(user => user.id === id)
+//                 if (isExist) {
+//                     if (data.name) isExist.name = data.name;
+//                     if (data.age) isExist.age = data.age;
+//                     if (data.email) isExist.email = data.email;
+//                     fs.writeFile("./users.json",JSON.stringify(users,null,2) ,(err) => {
+//                         if (err) {
+//                             res.write(err.message)
+//                             res.end()
+//                             return
+//                         }
+//                         res.write("modify is successfully")
+//                         res.end()
+//                     })  
+//                 }else {
+//                     res.write("id is not found")
+//                     res.end()
+//                     return
+//                 }
+//             })
+//         })
+//     }else{
+//         res.writeHead(404);
+//         res.write("not found")
+//     }
+// }).listen(3000,()=>{
+//     console.log("running on port 3000");  
+// })
+
+//____3
+
+// import fs from "fs";
+// import http from "http";
+
+// http.createServer((req ,res) => {
+//     const url = req.url;
+//     const method = req.method;
+//     if (url.startsWith("/user/") && method == "DELETE") {
+//         fs.readFile("./users.json","utf-8",(err ,users) => {
+//                 if(err){
+//                     res.write(err.message)
+//                     res.end()
+//                     return
+//                 }
+//                 users = JSON.parse(users);
+//                 const id = Number(url.split("/")[2])
+//                 const isExist = users.find(user => user.id === id)
+//                 if (isExist) {
+//                     const newUsers = users.filter(user => user.id != id)
+//                     fs.writeFile("./users.json",JSON.stringify(newUsers,null,2) ,(err) => {
+//                         if (err) {
+//                             res.write(err.message)
+//                             res.end()
+//                             return
+//                         }
+//                         res.write("deleted is successfully")
+//                         res.end()
+//                     })  
+//                 }else {
+//                     res.write("id is not found")
+//                     res.end()
+//                     return
+//                 }
+//             })
+//     }else{
+//         res.writeHead(404);
+//         res.write("not found")
+//     }
+// }).listen(3000,()=>{
+//     console.log("running on port 3000");  
+// })
+
+
+//______4
+
+
+// import fs from "fs";
+// import http from "http";
+
+// http.createServer((req ,res) => {
+//     const url = req.url;
+//     const method = req.method;
+//     if (url == "/user" && method == "GET") {
+//         fs.readFile("./users.json","utf-8",(err ,users) => {
+//                 if(err){
+//                     res.write(err.message)
+//                     res.end()
+//                     return
+//                 }
+//                 users = JSON.parse(users);
+//                 res.write(JSON.stringify(users))
+//                 res.end()
+//             })
+//     }else{
+//         res.writeHead(404);
+//         res.write("not found")
+//     }
+// }).listen(3000,()=>{
+//     console.log("running on port 3000");  
+// })
+
+//________5
+
+
+// import fs from "fs";
+// import http from "http";
+
+// http.createServer((req ,res) => {
+//     const url = req.url;
+//     const method = req.method;
+//     if (url.startsWith("/user/") && method == "GET") {
+//         const id = Number(url.split("/")[2])
+//         fs.readFile("./users.json","utf-8",(err ,users) => {
+//                 if(err){
+//                     res.write(err.message)
+//                     res.end()
+//                     return
+//                 }
+//                 users = JSON.parse(users);
+//                 const isExist = users.find(user => user.id === id)
+//                 if (isExist) {
+//                     res.write(JSON.stringify(isExist))
+//                     res.end()
+//                 }else{
+//                     res.write("user not found")
+//                     res.end()
+//                 }
+                
+//             })
+//     }else{
+//         res.writeHead(404);
+//         res.write("not found")
+//     }
+// }).listen(3000,()=>{
+//     console.log("running on port 3000");  
+// })
